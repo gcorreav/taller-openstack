@@ -1,0 +1,17 @@
+heat_template_version: rocky
+
+description: Simple template to deploy a single compute instance
+
+resources:
+  gerardo_cirros:
+    type: OS::Nova::Server
+    properties:
+      image: cirros-0.5.2-x86_64
+      flavor: m1.xtiny
+      networks:
+        - network: gerardo1
+
+outputs:
+  instance_ip:
+    description: The IP address of the deployed instance
+    value: {get_attr: [gerardo_cirros, first_address]}
