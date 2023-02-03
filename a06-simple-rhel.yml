@@ -1,0 +1,33 @@
+heat_template_version: rocky
+
+description: Simple template to deploy a single compute instance
+
+resources:
+  my_instance:
+    type: OS::Nova::Server
+    properties:
+      key_name: gerardo
+      image: rhel-8.5-x86_64
+      flavor: m1.medium
+      networks:
+        - network: dmz
+        - network: gerardo2
+      user_data_format: RAW
+      user_data: |
+        #cloud-config
+        password: SuperSegur0
+        chpasswd: {expire: False}
+        ssh_pwauth: False
+        # Set keyboard layout to "latam"
+        runcmd:
+          - /usr/bin/localectl set-keymap latam
+        # Attach subscription
+        rh_subscription:
+          activation-key: YOURactivationKEYhere
+          org: YOURorganizationID
+          auto-attach: True
+
+outputs:
+  instance_ip:
+    description: The IP address of the deployed instance
+    value: {get_attr: [my_instance, first_address]}
