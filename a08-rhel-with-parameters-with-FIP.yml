@@ -50,7 +50,7 @@ resources:
   my_floating_ip:
     type: OS::Neutron::FloatingIP
     properties:
-      floating_network: 'Provider Network 1837'
+      floating_network: 'Your Provider Network'
   association_instance-fip:
     type: OS::Neutron::FloatingIPAssociation
     properties:
