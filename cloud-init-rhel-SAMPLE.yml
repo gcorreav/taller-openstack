@@ -1,0 +1,12 @@
+#cloud-config
+password: SuperSegur0
+chpasswd: {expire: False}
+ssh_pwauth: False
+# Set keyboard layout to "latam"
+runcmd:
+  - /usr/bin/localectl set-keymap latam
+# Attach subscription
+rh_subscription:
+  activation-key: YOURactivationKEYhere
+  org: YOURorganizationID
+  auto-attach: True
